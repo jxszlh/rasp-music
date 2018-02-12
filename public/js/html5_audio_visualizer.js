@@ -12,7 +12,7 @@ window.onload = function() {
     socket = new WebSocket('ws://192.168.9.121:3001');
     // Connection opened
     socket.addEventListener('open', function (event) {
-        socket.send('Hello Server!');
+        //socket.send('Hello Server!');
     });
     // Listen for messages
     socket.addEventListener('message', function (event) {
