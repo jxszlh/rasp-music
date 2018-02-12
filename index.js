@@ -12,6 +12,8 @@ pins.forEach(pin => {
   rpio.pwmSetRange(pin, range);
 });
 
+pins.forEach(pin => rpio.pwmSetData(pin, 255))
+setTimeout(() => pins.forEach(pin => rpio.pwmSetData(pin, 0)), 5000)
 
 app.use(express.static('public'))
 
