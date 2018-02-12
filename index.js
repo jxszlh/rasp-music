@@ -1,5 +1,17 @@
 const express = require('express')
 const app = express()
+const rpio = require('rpio')
+
+const pins = [12, 32, 33, 35];
+const range = 255;
+const clockdiv = 8;       /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
+
+pins.forEach(pin => {
+  rpio.open(pin, rpio.PWM);
+  rpio.pwmSetClockDivider(clockdiv);
+  rpio.pwmSetRange(pin, range);
+});
+
 
 app.use(express.static('public'))
 
@@ -14,6 +26,7 @@ const wss = new WebSocket.Server({ port: 3001 });
 wss.on('connection', ws => {
   ws.on('message', array => {
     console.log('received: ', array);
+    array.forEach((value, index) => rpio.pwmSetData(pins[index], value));
   });
 
   ws.send('hello client!');

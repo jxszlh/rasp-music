@@ -201,8 +201,12 @@ Visualizer.prototype = {
                 };
             };
 
-            
-            socket.send(array);
+            var usedDataArray = array.slice(0, parseInt(array.length * 0.75));
+            var sentLength = 4;
+            var start = parseInt(usedDataArray.length / sentLength / 2);
+            var steps = parseInt(usedDataArray.length / 4);
+            var sentArray = [usedDataArray[start], usedDataArray[start + steps], usedDataArray[start + 2 * steps], usedDataArray[start + 3 * steps]];
+            socket.send(sentArray);// 0 - 255
 
             var step = Math.round(array.length / meterNum); //sample limited data from the total array
             ctx.clearRect(0, 0, cwidth, cheight);
