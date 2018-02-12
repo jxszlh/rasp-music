@@ -206,7 +206,7 @@ Visualizer.prototype = {
             var start = parseInt(usedDataArray.length / sentLength / 2);
             var steps = parseInt(usedDataArray.length / 4);
             var sentArray = [usedDataArray[start], usedDataArray[start + steps], usedDataArray[start + 2 * steps], usedDataArray[start + 3 * steps]];
-            socket.send(JSON.stringfy(sentArray));// 0 - 255
+            socket.send(JSON.stringify(sentArray));// 0 - 255
 
             var step = Math.round(array.length / meterNum); //sample limited data from the total array
             ctx.clearRect(0, 0, cwidth, cheight);
