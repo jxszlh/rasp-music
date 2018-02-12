@@ -24,8 +24,9 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 3001 });
 
 wss.on('connection', ws => {
-  ws.on('message', array => {
-    console.log('received: ', array);
+  ws.on('message', message => {
+    console.log('received: ', message);
+    const array = JSON.parse(message);
     array.forEach((value, index) => rpio.pwmSetData(pins[index], value));
   });
 

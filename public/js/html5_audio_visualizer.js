@@ -9,7 +9,7 @@ var socket;
 
 window.onload = function() {
     // Create WebSocket connection.
-    socket = new WebSocket('ws://localhost:3001');
+    socket = new WebSocket('ws://192.168.9.121:3001');
     // Connection opened
     socket.addEventListener('open', function (event) {
         socket.send('Hello Server!');
@@ -206,7 +206,7 @@ Visualizer.prototype = {
             var start = parseInt(usedDataArray.length / sentLength / 2);
             var steps = parseInt(usedDataArray.length / 4);
             var sentArray = [usedDataArray[start], usedDataArray[start + steps], usedDataArray[start + 2 * steps], usedDataArray[start + 3 * steps]];
-            socket.send(sentArray);// 0 - 255
+            socket.send(JSON.stringfy(sentArray));// 0 - 255
 
             var step = Math.round(array.length / meterNum); //sample limited data from the total array
             ctx.clearRect(0, 0, cwidth, cheight);
